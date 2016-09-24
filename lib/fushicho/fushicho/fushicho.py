@@ -7,6 +7,17 @@ import socket
 import re
 
 
+def read_model():
+    path_name = "assets/models.py"
+
+    with open(path_name, 'r') as f:
+        for row in f:
+            # title', 'models.CharField'を取得する
+            m = re.match(r" *([a-zA-Z0-9]+) *= *([\.a-zA-Z0-9]+)", row)
+            # m = re.match(r" +(\S) = (\S)", row)
+            if m > 0:
+                print m.groups()
+
 def read_template(name, info):
     path_name = "assets/{}.template".format(name)
 
@@ -14,6 +25,33 @@ def read_template(name, info):
         for row in f:
             # print row.strip()
             print row
+
+    # AutoField
+    # BigIntegerField
+    # BooleanField
+    # CharField
+    # CommaSeparatedIntegerField
+    # DateField
+    # DateTimeField
+    # DecimalField
+    # EmailField
+    # FileField
+    # FileField and FieldFile
+    # FilePathField
+    # FloatField
+    # ImageField
+    # IntegerField
+    # IPAddressField
+    # GenericIPAddressField
+    # NullBooleanField
+    # PositiveIntegerField
+    # PositiveSmallIntegerField
+    # SlugField
+    # SmallIntegerField
+    # TextField
+    # TimeField
+    # URLField
+    # XMLField
 
 def crate():
     # 上書き
@@ -37,6 +75,8 @@ if __name__ == "__main__":
     argvs = sys.argv  # コマンドライン引数を格納したリストの取得
     argc = len(argvs) # 引数の個数
 
+    read_model()
+
     # main_js.templateが完成形
     # main_search_panel_js
     # main_table_raw_js
@@ -52,8 +92,8 @@ if __name__ == "__main__":
     info.capitalized = 'Book'
     info.capitalized_plural = 'Books'
 
-    for name in names:
-        read_template(name, info)
+    # for name in names:
+    #     read_template(name, info)
 
     # 引数が1つなのは自分自身の.py
     if (argc == 1):
