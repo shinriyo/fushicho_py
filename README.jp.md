@@ -7,15 +7,7 @@ Overview
 
 React code template generator.
 
-## Demo
-
-N/A
-
-## VS. 
-
-N/A
-
-## Requirement
+## 必要
 
 Python 2.7.x
 
@@ -23,7 +15,7 @@ Mac OS X/macOS
 Linux
 Windows
 
-## Usage
+## 使用方法
 
 ```
 fushicho.py
@@ -32,27 +24,43 @@ fushicho.py
 ## Install
 
 ```
-pip install port_killer
+pip install fushicho
 ```
 
-## Development
+## 今後の開発
+
+環境
+
+```bash
+virtualenv-3.4 env
+```
+
+```bash
+source env/bin/activate
+```
+
 
 # ソースパッケージ作成
 
+```bash
 python setup.py sdist
+```
 
 # パッケージインストール
-$ python setup.py install
 
-## Contribution
+```bash
+python setup.py install
+```
+
+## コントリビューター
 
 shinriyo
 
-## Licence
+## ライセンス
 
 MIT.
 
-## Author
+## 著者
 
 [shinriyo](https://github.com/shinriyo/)
 
