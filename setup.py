@@ -20,7 +20,7 @@ def find_scripts(scripts_path):
 import os
 import sys
 
-libdir = "lib/port_killer"
+libdir = "lib/fushicho"
 bindir = os.path.join(libdir, "bin")
 
 sys.path.insert(0, libdir)

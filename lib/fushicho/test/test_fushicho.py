@@ -8,7 +8,7 @@ from lib.port_killer.port_killer import nothing
 from datetime import datetime, date, time
 
 
-class PortKillerTest(unittest.TestCase):
+class FushichoTest(unittest.TestCase):
     def setUp(self):
         pass
 

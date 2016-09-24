@@ -12,4 +12,4 @@ INFO = dict(
     ]
 )
 
-from .port_killer import nothing
+from .fushicho import nothing
