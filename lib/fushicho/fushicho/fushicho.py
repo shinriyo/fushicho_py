@@ -77,7 +77,15 @@ if __name__ == "__main__":
 
     read_model()
 
-    # main_js.templateが完成形
+    # TODO:
+    arg_name = 'book'
+    # TODO: 複数形はsをつけただけなので今後対応
+    plural = "{}s".format(arg_name)
+    capitalized = arg_name.capitalize()
+    capitalized_plural = plural.capitalize()
+
+    # main_js.templateが完成形なので消さないこと
+    # 以下が実施に利用
     # main_search_panel_js
     # main_table_raw_js
     # main_table_js
@@ -87,10 +95,10 @@ if __name__ == "__main__":
             'main_form_js', 'main_panel_js']
 
     info = TemplateInfo()
-    info.name = "book"
-    info.plural = "books"
-    info.capitalized = 'Book'
-    info.capitalized_plural = 'Books'
+    info.name = arg_name
+    info.plural = plural
+    info.capitalized = capitalized
+    info.capitalized_plural = capitalized_plural
 
     # for name in names:
     #     read_template(name, info)
@@ -99,6 +107,7 @@ if __name__ == "__main__":
     if (argc == 1):
         pass
     elif (argc == 2):
+        # 引数2番目が名前
         pass
     else:
         sys.exit('Argments are invalid.')
