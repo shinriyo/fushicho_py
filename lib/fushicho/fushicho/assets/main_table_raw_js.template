@@ -1,0 +1,14 @@
+var BookTableRow = React.createClass({
+    render: function() {
+        return (
+            <tr>
+                <td>{this.props.book.title}</td>
+                <td>{this.props.book.category}</td>
+                <td><a href='#' onClick={this.onClick}>Edit</a></td>
+            </tr>
+        );
+    },
+    onClick: function(id) {
+        this.props.handleEditClickPanel(this.props.book.id);
+    }
+});

@@ -1,0 +1,170 @@
+var BookPanel = React.createClass({
+    getInitialState: function() {
+        return {
+            books: [],
+            editingBook: {
+                title:"",
+                category:"",
+            },
+            search:"",
+            message:""
+        };
+    },
+    render: function() {
+        return(
+            <div className="row">
+                <div className="one-half column">
+                    <SearchPanel
+                        search={this.state.search}
+                        onSearchChanged={this.onSearchChanged}
+                        onClearSearch={this.onClearSearch}
+                    />
+                    <BookTable books={this.state.books} handleEditClickPanel={this.handleEditClickPanel} />
+                </div>
+                <div className="one-half column">
+                    <BookForm
+                        book={this.state.editingBook}
+                        message={this.state.message}
+                        handleChange={this.handleChange}
+                        handleSubmitClick={this.handleSubmitClick}
+                        handleCancelClick={this.handleCancelClick}
+                        handleDeleteClick={this.handleDeleteClick}
+                    />
+                </div>
+            </div>
+        );
+    },
+    componentDidMount: function() {
+        this.reloadBooks('');
+    },
+    onSearchChanged: function(query) {
+        if (this.promise) {
+            clearInterval(this.promise)
+        }
+        this.setState({
+            search: query
+        });
+        this.promise = setTimeout(function () {
+            this.reloadBooks(query);
+        }.bind(this), 200);
+    },
+    onClearSearch: function() {
+        this.setState({
+            search: ''
+        });
+        this.reloadBooks('');
+    },
+    handleEditClickPanel: function(id) {
+        var book = $.extend({}, this.state.books.filter(function(x) {
+            return x.id == id;
+        })[0] );
+
+        this.setState({
+            editingBook: book,
+            message: ''
+        });
+    },
+    handleChange: function(title, category) {
+        this.setState({
+            editingBook: {
+                title: title,
+                category: category,
+                id: this.state.editingBook.id
+            }
+        });
+    },
+    handleCancelClick: function(e) {
+        this.setState({
+            editingBook: {}
+        });
+    },
+    reloadBooks: function(query) {
+        $.ajax({
+            url: this.props.url+'?search='+query,
+            dataType: 'json',
+            cache: false,
+            success: function(data) {
+                this.setState({
+                    books: data,
+                    search: query
+                });
+            }.bind(this),
+            error: function(xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+                this.setState({
+                    message: err.toString()
+                });
+            }.bind(this)
+        });
+    },
+    handleSubmitClick: function(e) {
+        e.preventDefault();
+        if(this.state.editingBook.id) {
+            $.ajax({
+                url: this.props.url+this.state.editingBook.id,
+                dataType: 'json',
+                method: 'PUT',
+                data:this.state.editingBook,
+                cache: false,
+                success: function(data) {
+                    this.setState({
+                        message: "Successfully updated book!"
+                    });
+                    this.reloadBooks('');
+                }.bind(this),
+                error: function(xhr, status, err) {
+                    console.error(this.props.url, status, err.toString());
+                    this.setState({
+                        message: err.toString()
+                    });
+                }.bind(this)
+            });
+        } else {
+            $.ajax({
+                url: this.props.url,
+                dataType: 'json',
+                method: 'POST',
+                data:this.state.editingBook,
+                cache: false,
+                success: function(data) {
+                    this.setState({
+                        message: "Successfully added book!"
+                    });
+                    this.reloadBooks('');
+                }.bind(this),
+                error: function(xhr, status, err) {
+                    console.error(this.props.url, status, err.toString());
+                    this.setState({
+                        message: err.toString()
+                    });
+                }.bind(this)
+            });
+        }
+        this.setState({
+            editingBook: {}
+        });
+    },
+    handleDeleteClick: function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: this.props.url+this.state.editingBook.id,
+            method: 'DELETE',
+            cache: false,
+            success: function(data) {
+                this.setState({
+                    message: "Successfully deleted book!",
+                    editingBook: {}
+                });
+                this.reloadBooks('');
+            }.bind(this),
+            error: function(xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+                this.setState({
+                    message: err.toString()
+                });
+            }.bind(this)
+        });
+    },
+});
+
+React.render(<BookPanel url='/api/books/' />, document.getElementById('content'));
