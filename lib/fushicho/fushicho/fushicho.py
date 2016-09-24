@@ -18,6 +18,34 @@ def read_model():
             if m > 0:
                 print m.groups()
 
+    fields = ['AutoField',
+    'BigIntegerField',
+    'BooleanField',
+    'CharField',
+    'CommaSeparatedIntegerField',
+    'DateField',
+    'DateTimeField',
+    'DecimalField',
+    'EmailField',
+    'FileField',
+    'FileField'
+    'FieldFile',
+    'FilePathField',
+    'FloatField',
+    'ImageField',
+    'IntegerField',
+    'IPAddressField',
+    'GenericIPAddressField',
+    'NullBooleanField',
+    'PositiveIntegerField',
+    'PositiveSmallIntegerField',
+    'SlugField',
+    'SmallIntegerField',
+    'TextField',
+    'TimeField',
+    'URLField',
+    'XMLField']
+
 def read_template(name, info):
     path_name = "assets/{}.template".format(name)
 
@@ -26,32 +54,6 @@ def read_template(name, info):
             # print row.strip()
             print row
 
-    # AutoField
-    # BigIntegerField
-    # BooleanField
-    # CharField
-    # CommaSeparatedIntegerField
-    # DateField
-    # DateTimeField
-    # DecimalField
-    # EmailField
-    # FileField
-    # FileField and FieldFile
-    # FilePathField
-    # FloatField
-    # ImageField
-    # IntegerField
-    # IPAddressField
-    # GenericIPAddressField
-    # NullBooleanField
-    # PositiveIntegerField
-    # PositiveSmallIntegerField
-    # SlugField
-    # SmallIntegerField
-    # TextField
-    # TimeField
-    # URLField
-    # XMLField
 
 def crate():
     # 上書き
