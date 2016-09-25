@@ -6,6 +6,8 @@ import sys
 import socket
 import re
 
+FILE_NAME = 'test.txt'
+
 class ModelInfo:
     def __init__(self):
         # カラム
@@ -87,14 +89,16 @@ def read_template(name, info):
         # ファイルの中をstr
         data = "".join(line for line in f)
         # print data.format(capitalized=info.capitalized)
-        print(data % info)
+        # print(data % info)
+        contain =data % info
+        over_write(contain)
         # for row in f:
         #    print row.strip()
 
-def crate():
-    # 上書き
-    with open('test.txt','w') as f:
-        f.write('hoge\n')
+def over_write(contain):
+    # 追記
+    with open(FILE_NAME,'a') as f:
+        f.write(contain)
         f.close()
 
 def message():
@@ -104,6 +108,9 @@ def message():
 if __name__ == "__main__":
     argvs = sys.argv  # コマンドライン引数を格納したリストの取得
     argc = len(argvs) # 引数の個数
+
+    # 一旦消す
+    os.remove(FILE_NAME)
 
     # 各カラム
     model_info = read_model()
