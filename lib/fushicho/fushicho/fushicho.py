@@ -151,7 +151,9 @@ if __name__ == "__main__":
 
     joined_label = ('\n' + ' ' * 16).join(labels)
     joined_js_nodes = ('\n' + ' ' * 8).join(js_nodes)
-    read_template('main_form_js', (capitalized, joined_label, arg_name, arg_name, arg_name, arg_name, joined_js_nodes))
+    # title, category
+    column_args = (', ').join(model_info.columns)
+    read_template('main_form_js', (capitalized, joined_label, arg_name, arg_name, arg_name, arg_name, joined_js_nodes, column_args ))
 
     # read_template('main_panel_js', ())
     # for name in names:

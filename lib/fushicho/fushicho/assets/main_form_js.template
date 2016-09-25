@@ -21,6 +21,6 @@ var %sForm = React.createClass({
     },
     onChange: function() {
         %s
-        this.props.handleChange(title, category);
+        this.props.handleChange(%s);
     }
 });
