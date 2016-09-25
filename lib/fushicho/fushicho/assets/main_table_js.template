@@ -1,15 +1,14 @@
-var BookTable = React.createClass({
+var %sTable = React.createClass({
     render: function() {
         var rows = [];
-        this.props.books.forEach(function(book) {
-            rows.push(<BookTableRow key={book.id} book={book} handleEditClickPanel={this.props.handleEditClickPanel}  />);
+        this.props.%s.forEach(function(%s) {
+            rows.push(<%sTableRow key={%s.id} %s={%s} handleEditClickPanel={this.props.handleEditClickPanel}  />);
         }.bind(this));
         return (
             <table>
                 <thead>
                     <tr>
-                        <th>Title</th>
-                        <th>Category</th>
+%s
                         <th>Edit</th>
                     </tr>
                 </thead>

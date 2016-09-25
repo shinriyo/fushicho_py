@@ -6,11 +6,18 @@ import sys
 import socket
 import re
 
+class ModelInfo:
+    def __init__(self):
+        # カラム
+        self.columns = []
+
+        # TODO:
+        self.hoge = ''
 
 def read_model():
     path_name = "assets/models.py"
 
-
+    model_info = ModelInfo()
     # フィールドごとに型チェック用
     fields = ['AutoField',
     'BigIntegerField',
@@ -48,6 +55,7 @@ def read_model():
             if m > 1:
                 groups = m.groups()
                 name = groups[0]
+                model_info.columns.append(name)
                 # 変数名
                 print("variable:{}".format(name))
                 type = groups[1]
@@ -61,6 +69,7 @@ def read_model():
                 else:
                     print(types)
 
+        return model_info
 
 
 def read_template(name, info):
@@ -70,7 +79,7 @@ def read_template(name, info):
         # ファイルの中をstr
         data = "".join(line for line in f)
         # print data.format(capitalized=info.capitalized)
-        print(data % info.capitalized)
+        print(data % info)
         # for row in f:
         #    print row.strip()
 
@@ -84,24 +93,12 @@ def message():
     install = ""
     print(install)
 
-
-class TemplateInfo:
-    def __init__(self):
-        self.name = ''
-        # 複数形
-        self.plural = ''
-
-        # 大文字開始
-        self.capitalized = ''
-
-        # 大文字複数形
-        self.capitalized_plural = ''
-
 if __name__ == "__main__":
     argvs = sys.argv  # コマンドライン引数を格納したリストの取得
     argc = len(argvs) # 引数の個数
 
-    read_model()
+    # 各カラム
+    model_info = read_model()
 
     # TODO:
     arg_name = 'book'
@@ -123,13 +120,17 @@ if __name__ == "__main__":
              'main_form_js',
              'main_panel_js']
 
-    info = TemplateInfo()
-    info.name = arg_name
-    info.plural = plural
-    info.capitalized = capitalized
-    info.capitalized_plural = capitalized_plural
+    # read_template('main_table_raw_js', (capitalized))
 
-    read_template('main_table_raw_js', info)
+    # <th>Title</th>
+    # <th>Category</th>
+    th = []
+    for column in model_info.columns:
+        indent = ' ' * 24
+        th.append((indent + '<th>{}</th>\n').format(column))
+    # read_template('main_table_js', (capitalized, plural, arg_name, capitalized, arg_name, arg_name, arg_name, ''.join(th)))
+    # read_template('main_form_js', ())
+
     # for name in names:
     #     read_template(name, info)
 
