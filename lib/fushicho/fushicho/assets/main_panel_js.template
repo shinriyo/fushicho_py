@@ -1,10 +1,9 @@
-var BookPanel = React.createClass({
+var %sPanel = React.createClass({
     getInitialState: function() {
         return {
-            books: [],
-            editingBook: {
-                title:"",
-                category:"",
+            %s: [],
+            editing%s: {
+                %s
             },
             search:"",
             message:""
@@ -19,11 +18,11 @@ var BookPanel = React.createClass({
                         onSearchChanged={this.onSearchChanged}
                         onClearSearch={this.onClearSearch}
                     />
-                    <BookTable books={this.state.books} handleEditClickPanel={this.handleEditClickPanel} />
+                    <%sTable %s={this.state.%s} handleEditClickPanel={this.handleEditClickPanel} />
                 </div>
                 <div className="one-half column">
-                    <BookForm
-                        book={this.state.editingBook}
+                    <%sForm
+                        %s={this.state.editing%s}
                         message={this.state.message}
                         handleChange={this.handleChange}
                         handleSubmitClick={this.handleSubmitClick}

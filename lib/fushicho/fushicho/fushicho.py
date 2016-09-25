@@ -14,8 +14,8 @@ class ModelInfo:
         # 大文字開始カラム
         self.capitalized_columns = []
 
-        # TODO:
-        self.hoge = ''
+        # タイプ
+        self.types = []
 
 def read_model():
     path_name = "assets/models.py"
@@ -64,7 +64,7 @@ def read_model():
                 model_info.capitalized_columns.append(name.capitalize())
 
                 # 変数名
-                print("variable:{}".format(name))
+                # print("variable:{}".format(name))
                 type = groups[1]
                 # models.CharFieldを分割
                 types = type.split(".")
@@ -72,7 +72,8 @@ def read_model():
                     # 型系
                     # 使わない print(types[0])
                     type = types[1]
-                    print("type:{}".format(type))
+                    # print("type:{}".format(type))
+                    model_info.types.append(type)
                 else:
                     print(types)
 
@@ -153,9 +154,15 @@ if __name__ == "__main__":
     joined_js_nodes = ('\n' + ' ' * 8).join(js_nodes)
     # title, category
     column_args = (', ').join(model_info.columns)
-    read_template('main_form_js', (capitalized, joined_label, arg_name, arg_name, arg_name, arg_name, joined_js_nodes, column_args ))
+    # read_template('main_form_js', (capitalized, joined_label, arg_name, arg_name, arg_name, arg_name, joined_js_nodes, column_args ))
 
-    # read_template('main_panel_js', ())
+    # 以下js生成
+    # title:"",
+    init_js = ('\n' + ' ' * 16).join("{}:\"\",".format(line) for line in model_info.columns)
+    # 結構長い
+    read_template('main_panel_js', (capitalized, plural, capitalized_plural, init_js, capitalized,
+                                    plural, plural, capitalized, arg_name, capitalized))
+
     # for name in names:
     #     read_template(name, info)
 
