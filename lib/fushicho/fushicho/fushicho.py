@@ -131,6 +131,7 @@ if __name__ == "__main__":
     #          'main_form_js',
     #          'main_panel_js']
 
+    read_template('main_search_panel_js', ())
     read_template('main_table_raw_js', (capitalized))
 
     # 以下タグ生成
