@@ -11,6 +11,9 @@ class ModelInfo:
         # カラム
         self.columns = []
 
+        # 大文字開始カラム
+        self.capitalized_columns = []
+
         # TODO:
         self.hoge = ''
 
@@ -55,7 +58,11 @@ def read_model():
             if m > 1:
                 groups = m.groups()
                 name = groups[0]
+                # カラム名
                 model_info.columns.append(name)
+                # 大文字開始カラム名
+                model_info.capitalized_columns.append(name.capitalize())
+
                 # 変数名
                 print("variable:{}".format(name))
                 type = groups[1]
@@ -109,27 +116,36 @@ if __name__ == "__main__":
 
     # main_js.templateが完成形なので消さないこと
     # 以下が実施に利用
-    # main_search_panel_js
-    # main_table_raw_js
-    # main_table_js
-    # main_form_js
-    # main_panel_js
-    names = ['main_search_panel_js',
-             'main_table_raw_js',
-             'main_table_js',
-             'main_form_js',
-             'main_panel_js']
+    # names = ['main_search_panel_js',
+    #          'main_table_raw_js',
+    #          'main_table_js',
+    #          'main_form_js',
+    #          'main_panel_js']
 
     # read_template('main_table_raw_js', (capitalized))
 
+    # 以下タグ生成
     # <th>Title</th>
     # <th>Category</th>
+    # 以下タグも生成
+    #<label forHtml='title'>Title</label><input ref='title' name='title' type='text' value={this.props.book.title} onChange={this.onChange}/>
     th = []
+    labels = []
+    index = 0
     for column in model_info.columns:
-        indent = ' ' * 24
-        th.append((indent + '<th>{}</th>\n').format(column))
-    # read_template('main_table_js', (capitalized, plural, arg_name, capitalized, arg_name, arg_name, arg_name, ''.join(th)))
-    # read_template('main_form_js', ())
+        # th tag
+        th.append('<th>{}</th>'.format(column))
+        # label tag
+        label = "<label forHtml='%s'>%s</label><input ref='%s' name='%s' type='text' value={this.props.%s.%s} onChange={this.onChange}/>" \
+            % (column, model_info.columns[index], column, column, arg_name, column)
+        labels.append(label)
+        index += 1
+
+    joined_th = ('\n' + ' ' * 24).join(th)
+    # read_template('main_table_js', (capitalized, plural, arg_name, capitalized, arg_name, arg_name, arg_name, joined_th))
+
+    joined_label = ('\n' + ' ' * 16).join(labels)
+    # read_template('main_form_js', (capitalized, joined_label))
 
     # for name in names:
     #     read_template(name, info)

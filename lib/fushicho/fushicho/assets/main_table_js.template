@@ -8,7 +8,7 @@ var %sTable = React.createClass({
             <table>
                 <thead>
                     <tr>
-%s
+                        %s
                         <th>Edit</th>
                     </tr>
                 </thead>
