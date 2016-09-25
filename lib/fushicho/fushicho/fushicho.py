@@ -99,6 +99,8 @@ def over_write(contain):
     # 追記
     with open(FILE_NAME,'a') as f:
         f.write(contain)
+        # 改行
+        f.write('\n')
         f.close()
 
 def message():
@@ -144,17 +146,17 @@ if __name__ == "__main__":
     th = []
     labels = []
     js_nodes = []
-    index = 0
-    for column in model_info.columns:
-        # th tag
-        th.append('<th>{}</th>'.format(column))
+
+    for index, column in enumerate(model_info.columns):
+        # th tag 大文字開始
+        th.append('<th>{}</th>'.format(model_info.capitalized_columns[index]))
         # label tag
-        label = "<label forHtml='%s'>%s</label><input ref='%s' name='%s' type='text' value={this.props.%s.%s} onChange={this.onChange}/>" \
-            % (column, model_info.columns[index], column, column, arg_name, column)
+        label = "<label forHtml='%s'>%s</label>" \
+                "<input ref='%s' name='%s' type='text' value={this.props.%s.%s} onChange={this.onChange}/>" \
+            % (column, model_info.capitalized_columns[index], column, column, arg_name, column)
         labels.append(label)
         js_node = "var {column} = React.findDOMNode(this.refs.{column}).value;".format(column=column)
         js_nodes.append(js_node)
-        index += 1
 
     joined_th = ('\n' + ' ' * 24).join(th)
     read_template('main_table_js', (capitalized, plural, arg_name, capitalized, arg_name, arg_name, arg_name, joined_th))
@@ -174,10 +176,10 @@ if __name__ == "__main__":
     editing_js = ('\n' + ' ' * 16).join("{column}: {column},".format(column=line) for line in model_info.columns)
 
     # 結構長い
-    read_template('main_panel_js', (capitalized, plural, capitalized_plural, init_js, capitalized,
+    read_template('main_panel_js', (capitalized, plural, capitalized, init_js, capitalized,
                                     plural, plural, capitalized, arg_name, capitalized, capitalized_plural,
                                     capitalized_plural, capitalized_plural, arg_name, plural,
-                                    plural, arg_name, column_args, capitalized, editing_js, capitalized,
+                                    capitalized, arg_name, column_args, capitalized, editing_js, capitalized,
                                     capitalized, capitalized_plural, plural, capitalized, capitalized, capitalized,
                                     arg_name, capitalized_plural, capitalized, arg_name, capitalized_plural, capitalized,
                                     #handleDeleteClick
