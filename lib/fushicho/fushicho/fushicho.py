@@ -129,8 +129,11 @@ if __name__ == "__main__":
     # <th>Category</th>
     # 以下タグも生成
     #<label forHtml='title'>Title</label><input ref='title' name='title' type='text' value={this.props.book.title} onChange={this.onChange}/>
+    # 以下jsも生成
+    # var title = React.findDOMNode(this.refs.title).value;
     th = []
     labels = []
+    js_nodes = []
     index = 0
     for column in model_info.columns:
         # th tag
@@ -139,14 +142,18 @@ if __name__ == "__main__":
         label = "<label forHtml='%s'>%s</label><input ref='%s' name='%s' type='text' value={this.props.%s.%s} onChange={this.onChange}/>" \
             % (column, model_info.columns[index], column, column, arg_name, column)
         labels.append(label)
+        js_node = "var {column} = React.findDOMNode(this.refs.{column}).value;".format(column=column)
+        js_nodes.append(js_node)
         index += 1
 
     joined_th = ('\n' + ' ' * 24).join(th)
     # read_template('main_table_js', (capitalized, plural, arg_name, capitalized, arg_name, arg_name, arg_name, joined_th))
 
     joined_label = ('\n' + ' ' * 16).join(labels)
-    # read_template('main_form_js', (capitalized, joined_label))
+    joined_js_nodes = ('\n' + ' ' * 8).join(js_nodes)
+    read_template('main_form_js', (capitalized, joined_label, arg_name, arg_name, arg_name, arg_name, joined_js_nodes))
 
+    # read_template('main_panel_js', ())
     # for name in names:
     #     read_template(name, info)
 
