@@ -67,11 +67,12 @@ def read_template(name, info):
     path_name = "assets/{}.template".format(name)
 
     with open(path_name, 'r') as f:
-        print f.format(info)
-        for row in f:
-            # print row.strip()
-            print row
-
+        # ファイルの中をstr
+        data = "".join(line for line in f)
+        # print data.format(capitalized=info.capitalized)
+        print(data % info.capitalized)
+        # for row in f:
+        #    print row.strip()
 
 def crate():
     # 上書き
@@ -116,8 +117,11 @@ if __name__ == "__main__":
     # main_table_js
     # main_form_js
     # main_panel_js
-    names = ['main_search_panel_js', 'main_table_raw_js', 'main_table_js',
-            'main_form_js', 'main_panel_js']
+    names = ['main_search_panel_js',
+             'main_table_raw_js',
+             'main_table_js',
+             'main_form_js',
+             'main_panel_js']
 
     info = TemplateInfo()
     info.name = arg_name
@@ -125,6 +129,7 @@ if __name__ == "__main__":
     info.capitalized = capitalized
     info.capitalized_plural = capitalized_plural
 
+    read_template('main_table_raw_js', info)
     # for name in names:
     #     read_template(name, info)
 

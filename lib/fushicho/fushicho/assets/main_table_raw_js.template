@@ -1,4 +1,4 @@
-var BookTableRow = React.createClass({
+var %sTableRow = React.createClass({
     render: function() {
         return (
             <tr>
