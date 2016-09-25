@@ -7,6 +7,7 @@ import socket
 import re
 
 FILE_NAME = 'test.txt'
+# FILE_NAME = 'static/main.js'
 
 class ModelInfo:
     def __init__(self):

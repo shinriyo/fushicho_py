@@ -3,14 +3,15 @@ var %sForm = React.createClass({
         return(
             <form onSubmit={this.props.handleSubmitClick}>
                 %s
-                /*<label forHtml='category'>Category</label>
+                {/*
+                <label forHtml='category'>Category</label>
                 <select ref='category' name='category' value={this.props.book.category} onChange={this.onChange} >
                     <option value='CRIME' >Crime</option>
                     <option value='HISTORY'>History</option>
                     <option value='HORROR'>Horror</option>
                     <option value='SCIFI'>SciFi</option>
                 </select>
-                */
+                */}
                 <br />
                 <input type='submit' value={this.props.%s.id?"Save (id = " +this.props.%s.id+ ")":"Add"} />
                 {this.props.%s.id?<button onClick={this.props.handleDeleteClick}>Delete</button>:null}
