@@ -6,8 +6,8 @@ import sys
 import socket
 import re
 
-FILE_NAME = 'test.txt'
-# FILE_NAME = 'static/main.js'
+# FILE_NAME = 'test.txt'
+FILE_NAME = 'static/main.js'
 
 class ModelInfo:
     def __init__(self):
@@ -19,6 +19,10 @@ class ModelInfo:
 
         # タイプ
         self.types = []
+
+def check_django():
+    static_path_exists = os.path.exists('static')
+    return static_path_exists
 
 def read_model():
     path_name = "assets/models.py"
@@ -91,7 +95,7 @@ def read_template(name, info):
         data = "".join(line for line in f)
         # print data.format(capitalized=info.capitalized)
         # print(data % info)
-        contain =data % info
+        contain = data % info
         over_write(contain)
         # for row in f:
         #    print row.strip()
@@ -111,6 +115,10 @@ def message():
 if __name__ == "__main__":
     argvs = sys.argv  # コマンドライン引数を格納したリストの取得
     argc = len(argvs) # 引数の個数
+
+    # Djangoのチェック
+    if not check_django():
+        pass
 
     # 一旦消す
     if os.path.exists(FILE_NAME):

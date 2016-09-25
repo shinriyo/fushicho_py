@@ -7,9 +7,10 @@ Overview
 
 React code template generator.
 
-## 必要
+## 必要環境
 
 Python 2.7.x
+Django 1.6.x
 
 Mac OS X/macOS
 Linux
