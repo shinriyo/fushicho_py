@@ -10,14 +10,8 @@ import re
 def read_model():
     path_name = "assets/models.py"
 
-    with open(path_name, 'r') as f:
-        for row in f:
-            # title', 'models.CharField'を取得する
-            m = re.match(r" *([a-zA-Z0-9]+) *= *([\.a-zA-Z0-9]+)", row)
-            # m = re.match(r" +(\S) = (\S)", row)
-            if m > 0:
-                print m.groups()
 
+    # フィールドごとに型チェック用
     fields = ['AutoField',
     'BigIntegerField',
     'BooleanField',
@@ -46,10 +40,34 @@ def read_model():
     'URLField',
     'XMLField']
 
+    with open(path_name, 'r') as f:
+        for row in f:
+            # title', 'models.CharField'を取得する
+            m = re.match(r" *([a-zA-Z0-9]+) *= *([\.a-zA-Z0-9]+)", row)
+            # m = re.match(r" +(\S) = (\S)", row)
+            if m > 1:
+                groups = m.groups()
+                name = groups[0]
+                # 変数名
+                print("variable:{}".format(name))
+                type = groups[1]
+                # models.CharFieldを分割
+                types = type.split(".")
+                if(len(types) > 1):
+                    # 型系
+                    # 使わない print(types[0])
+                    type = types[1]
+                    print("type:{}".format(type))
+                else:
+                    print(types)
+
+
+
 def read_template(name, info):
     path_name = "assets/{}.template".format(name)
 
     with open(path_name, 'r') as f:
+        print f.format(info)
         for row in f:
             # print row.strip()
             print row
@@ -60,6 +78,11 @@ def crate():
     with open('test.txt','w') as f:
         f.write('hoge\n')
         f.close()
+
+def message():
+    install = ""
+    print(install)
+
 
 class TemplateInfo:
     def __init__(self):
