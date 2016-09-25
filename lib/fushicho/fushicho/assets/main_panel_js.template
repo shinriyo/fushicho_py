@@ -66,25 +66,24 @@ var %sPanel = React.createClass({
     handleChange: function(%s) {
         this.setState({
             editing%s: {
-                title: title,
-                category: category,
-                id: this.state.editingBook.id
+                %s
+                id: this.state.editing%s.id
             }
         });
     },
     handleCancelClick: function(e) {
         this.setState({
-            editingBook: {}
+            editing%s: {}
         });
     },
-    reloadBooks: function(query) {
+    reload%s: function(query) {
         $.ajax({
             url: this.props.url+'?search='+query,
             dataType: 'json',
             cache: false,
             success: function(data) {
                 this.setState({
-                    books: data,
+                    %s: data,
                     search: query
                 });
             }.bind(this),
@@ -98,18 +97,18 @@ var %sPanel = React.createClass({
     },
     handleSubmitClick: function(e) {
         e.preventDefault();
-        if(this.state.editingBook.id) {
+        if(this.state.editing%s.id) {
             $.ajax({
-                url: this.props.url+this.state.editingBook.id,
+                url: this.props.url+this.state.editing%s.id,
                 dataType: 'json',
                 method: 'PUT',
-                data:this.state.editingBook,
+                data:this.state.editing%s,
                 cache: false,
                 success: function(data) {
                     this.setState({
-                        message: "Successfully updated book!"
+                        message: "Successfully updated %s!"
                     });
-                    this.reloadBooks('');
+                    this.reload%s('');
                 }.bind(this),
                 error: function(xhr, status, err) {
                     console.error(this.props.url, status, err.toString());
@@ -123,13 +122,13 @@ var %sPanel = React.createClass({
                 url: this.props.url,
                 dataType: 'json',
                 method: 'POST',
-                data:this.state.editingBook,
+                data:this.state.editing%s,
                 cache: false,
                 success: function(data) {
                     this.setState({
-                        message: "Successfully added book!"
+                        message: "Successfully added %s!"
                     });
-                    this.reloadBooks('');
+                    this.reload%s('');
                 }.bind(this),
                 error: function(xhr, status, err) {
                     console.error(this.props.url, status, err.toString());
@@ -140,7 +139,7 @@ var %sPanel = React.createClass({
             });
         }
         this.setState({
-            editingBook: {}
+            editing%s: {}
         });
     },
     handleDeleteClick: function(e) {

@@ -162,11 +162,15 @@ if __name__ == "__main__":
 
     # 以下js生成
     # title: title,
+    editing_js = ('\n' + ' ' * 16).join("{column}: {column},".format(column=line) for line in model_info.columns)
+
     # 結構長い
     read_template('main_panel_js', (capitalized, plural, capitalized_plural, init_js, capitalized,
                                     plural, plural, capitalized, arg_name, capitalized, capitalized_plural,
                                     capitalized_plural, capitalized_plural, arg_name, plural,
-                                    plural, arg_name, column_args, capitalized))
+                                    plural, arg_name, column_args, capitalized, editing_js, capitalized,
+                                    capitalized, capitalized_plural, plural, capitalized, capitalized, capitalized,
+                                    arg_name, capitalized_plural, capitalized, arg_name, capitalized_plural, capitalized))
 
     # for name in names:
     #     read_template(name, info)
