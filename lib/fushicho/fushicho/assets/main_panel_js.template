@@ -34,7 +34,7 @@ var %sPanel = React.createClass({
         );
     },
     componentDidMount: function() {
-        this.reloadBooks('');
+        this.reload%s('');
     },
     onSearchChanged: function(query) {
         if (this.promise) {
@@ -44,28 +44,28 @@ var %sPanel = React.createClass({
             search: query
         });
         this.promise = setTimeout(function () {
-            this.reloadBooks(query);
+            this.reload%s(query);
         }.bind(this), 200);
     },
     onClearSearch: function() {
         this.setState({
             search: ''
         });
-        this.reloadBooks('');
+        this.reload%s('');
     },
     handleEditClickPanel: function(id) {
-        var book = $.extend({}, this.state.books.filter(function(x) {
+        var %s = $.extend({}, this.state.%s.filter(function(x) {
             return x.id == id;
         })[0] );
 
         this.setState({
-            editingBook: book,
+            editing%s: %s,
             message: ''
         });
     },
-    handleChange: function(title, category) {
+    handleChange: function(%s) {
         this.setState({
-            editingBook: {
+            editing%s: {
                 title: title,
                 category: category,
                 id: this.state.editingBook.id
