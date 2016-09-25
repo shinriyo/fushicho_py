@@ -110,7 +110,8 @@ if __name__ == "__main__":
     argc = len(argvs) # 引数の個数
 
     # 一旦消す
-    os.remove(FILE_NAME)
+    if os.path.exists(FILE_NAME):
+        os.remove(FILE_NAME)
 
     # 各カラム
     model_info = read_model()
@@ -130,7 +131,7 @@ if __name__ == "__main__":
     #          'main_form_js',
     #          'main_panel_js']
 
-    # read_template('main_table_raw_js', (capitalized))
+    read_template('main_table_raw_js', (capitalized))
 
     # 以下タグ生成
     # <th>Title</th>
@@ -155,13 +156,13 @@ if __name__ == "__main__":
         index += 1
 
     joined_th = ('\n' + ' ' * 24).join(th)
-    # read_template('main_table_js', (capitalized, plural, arg_name, capitalized, arg_name, arg_name, arg_name, joined_th))
+    read_template('main_table_js', (capitalized, plural, arg_name, capitalized, arg_name, arg_name, arg_name, joined_th))
 
     joined_label = ('\n' + ' ' * 16).join(labels)
     joined_js_nodes = ('\n' + ' ' * 8).join(js_nodes)
     # title, category
     column_args = (', ').join(model_info.columns)
-    # read_template('main_form_js', (capitalized, joined_label, arg_name, arg_name, arg_name, arg_name, joined_js_nodes, column_args ))
+    read_template('main_form_js', (capitalized, joined_label, arg_name, arg_name, arg_name, arg_name, joined_js_nodes, column_args ))
 
     # 以下js生成
     # title:"",
