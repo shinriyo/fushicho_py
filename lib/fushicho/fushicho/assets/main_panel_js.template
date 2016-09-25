@@ -145,15 +145,15 @@ var %sPanel = React.createClass({
     handleDeleteClick: function(e) {
         e.preventDefault();
         $.ajax({
-            url: this.props.url+this.state.editingBook.id,
+            url: this.props.url+this.state.editing%s.id,
             method: 'DELETE',
             cache: false,
             success: function(data) {
                 this.setState({
-                    message: "Successfully deleted book!",
-                    editingBook: {}
+                    message: "Successfully deleted %s!",
+                    editing%s: {}
                 });
-                this.reloadBooks('');
+                this.reload%s('');
             }.bind(this),
             error: function(xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
@@ -165,4 +165,4 @@ var %sPanel = React.createClass({
     },
 });
 
-React.render(<BookPanel url='/api/books/' />, document.getElementById('content'));
+React.render(<%sPanel url='/api/%s/' />, document.getElementById('content'));

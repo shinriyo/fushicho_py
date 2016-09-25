@@ -170,7 +170,11 @@ if __name__ == "__main__":
                                     capitalized_plural, capitalized_plural, arg_name, plural,
                                     plural, arg_name, column_args, capitalized, editing_js, capitalized,
                                     capitalized, capitalized_plural, plural, capitalized, capitalized, capitalized,
-                                    arg_name, capitalized_plural, capitalized, arg_name, capitalized_plural, capitalized))
+                                    arg_name, capitalized_plural, capitalized, arg_name, capitalized_plural, capitalized,
+                                    #handleDeleteClick
+                                    capitalized, arg_name, capitalized, capitalized_plural,
+                                    capitalized, plural
+    ))
 
     # for name in names:
     #     read_template(name, info)
