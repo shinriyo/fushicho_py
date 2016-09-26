@@ -3,10 +3,8 @@
 
 import os
 import sys
-import socket
 import re
 
-# FILE_NAME = 'test.txt'
 FILE_NAME = 'static/main.js'
 
 class ModelInfo:
@@ -29,33 +27,33 @@ def read_model():
 
     model_info = ModelInfo()
     # フィールドごとに型チェック用
-    fields = ['AutoField',
-    'BigIntegerField',
-    'BooleanField',
-    'CharField',
-    'CommaSeparatedIntegerField',
-    'DateField',
-    'DateTimeField',
-    'DecimalField',
-    'EmailField',
-    'FileField',
-    'FileField'
-    'FieldFile',
-    'FilePathField',
-    'FloatField',
-    'ImageField',
-    'IntegerField',
-    'IPAddressField',
-    'GenericIPAddressField',
-    'NullBooleanField',
-    'PositiveIntegerField',
-    'PositiveSmallIntegerField',
-    'SlugField',
-    'SmallIntegerField',
-    'TextField',
-    'TimeField',
-    'URLField',
-    'XMLField']
+    fields = {'AutoField':'',
+    'BigIntegerField':'',
+    'BooleanField':'',
+    'CharField':'',
+    'CommaSeparatedIntegerField':'',
+    'DateField':'',
+    'DateTimeField':'',
+    'DecimalField':'',
+    'EmailField':'',
+    'FileField':'',
+    'FileField':'',
+    'FieldFile':'',
+    'FilePathField':'',
+    'FloatField':'',
+    'ImageField':'',
+    'IntegerField':'',
+    'IPAddressField':'',
+    'GenericIPAddressField':'',
+    'NullBooleanField':'',
+    'PositiveIntegerField':'',
+    'PositiveSmallIntegerField':'',
+    'SlugField':'',
+    'SmallIntegerField':'',
+    'TextField':'',
+    'TimeField':'',
+    'URLField':'',
+    'XMLField':'',}
 
     with open(path_name, 'r') as f:
         for row in f:
