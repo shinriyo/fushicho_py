@@ -27,7 +27,7 @@ def read_model():
 
     model_info = ModelInfo()
     # フィールドごとに型チェック用
-    fields = {'AutoField':'',
+    fields_dic = {'AutoField':'',
     'BigIntegerField':'',
     'BooleanField':'',
     'CharField':'',
@@ -76,8 +76,11 @@ def read_model():
                     # 型系
                     # 使わない print(types[0])
                     type = types[1]
-                    # print("type:{}".format(type))
-                    model_info.types.append(type)
+                    if type in fields_dic:
+                        print("type:{}, field type:{}".format(type, fields_dic[type]))
+                        model_info.types.append(type)
+                    else:
+                        print('unknown type.')
                 else:
                     print(types)
 
