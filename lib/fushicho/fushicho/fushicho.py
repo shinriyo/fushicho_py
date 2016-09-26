@@ -37,7 +37,6 @@ def read_model():
     'DecimalField':'',
     'EmailField':'',
     'FileField':'',
-    'FileField':'',
     'FieldFile':'',
     'FilePathField':'',
     'FloatField':'',
